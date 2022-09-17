@@ -196,7 +196,7 @@ limit_bottom = 0
 texture = ExtResource( 1 )
 hframes = 23
 vframes = 5
-frame = 3
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack = SubResource( 3 )
@@ -220,7 +220,13 @@ parameters/playback = SubResource( 10 )
 collision_layer = 8
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack2D"]
+[node name="leftColision" type="CollisionShape2D" parent="attack2D"]
+position = Vector2( -10.2781, -0.833 )
+rotation = -2.09368e-06
+scale = Vector2( 3.533, -6.451 )
+shape = SubResource( 22 )
+
+[node name="rightColision" type="CollisionShape2D" parent="attack2D"]
 position = Vector2( 15.8333, -0.833336 )
 rotation = -3.14159
 scale = Vector2( 3.53328, -6.45124 )

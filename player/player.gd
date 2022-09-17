@@ -8,6 +8,8 @@ var speed : int = 300
 var gravity : = 600
 var jumpForce : = 500
 
+var direction = Vector2.RIGHT
+
 var prePY : int = 0
 
 var vel : = Vector2()
@@ -16,7 +18,8 @@ onready var playerSprite : = get_node("playerSprite")
 
 func _ready():
 	animation_SM = $AnimationTree.get("parameters/playback")
-	get_node("attack2D/CollisionShape2D").disabled = true	
+	get_node("attack2D/leftColision").disabled = true
+	get_node("attack2D/rightColision").disabled = true
 
 func _physics_process(delta: float) -> void:
 	var currAnimation = animation_SM.get_current_node()
@@ -33,12 +36,14 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("move_left"):
 		vel.x -= speed
 		playerSprite.flip_h = true
-		get_node("attack2D/CollisionShape2D").position.x *= -1
+		direction = Vector2.LEFT
+#		get_node("attack2D/CollisionShape2D").position.x *= -1
 	
 	if Input.is_action_pressed("move_right"):
 		vel.x += speed
 		playerSprite.flip_h = false
-		get_node("attack2D/CollisionShape2D").position.x *= 1
+		direction = Vector2.RIGHT
+#		get_node("attack2D/CollisionShape2D").position.x *= 1
 	
 	if is_on_floor():
 		if vel.x != 0:
@@ -74,6 +79,7 @@ func takeDamage():
 	return
 
 func die():
+	get_node("playerCollision").disabled = true
 	animation_SM.travel("death")
 #	set_physics_process(false)
 	var t = Timer.new()
@@ -88,7 +94,10 @@ func die():
 	
 	
 func attack():
-	get_node("attack2D/CollisionShape2D").disabled = false
+	if direction == Vector2.LEFT:
+		get_node("attack2D/leftColision").disabled = false
+	else:
+		get_node("attack2D/rightColision").disabled = false
 	animation_SM.travel("attack")
 	var t = Timer.new()
 	t.set_wait_time(0.1)
@@ -96,15 +105,12 @@ func attack():
 	self.add_child(t)
 	t.start()
 	yield(t, "timeout")
-	get_node("attack2D/CollisionShape2D").disabled = true
+	if direction == Vector2.LEFT:
+		get_node("attack2D/leftColision").disabled = true
+	else:
+		get_node("attack2D/rightColision").disabled = true
 	t.queue_free()		
 
 
 func damageEnemy(body):
 	body.takeDamage()
-	
-func returnSignedOne(val):
-	if val > 0:
-		return 1
-	else:
-		return -1

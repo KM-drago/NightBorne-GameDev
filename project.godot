@@ -14,6 +14,10 @@ config/name="YnY"
 run/main_scene="res://mainScene.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Hud="*res://hud/hud.tscn"
+
 [display]
 
 window/size/width=1280
@@ -50,6 +54,7 @@ attack={
 2d_physics/layer_3="normalEnemy"
 2d_physics/layer_4="playerAttack"
 2d_physics/layer_5="blueOrb"
+2d_physics/layer_6="heart"
 
 [physics]
 

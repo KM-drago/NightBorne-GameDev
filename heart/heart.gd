@@ -4,8 +4,8 @@ extends StaticBody2D
 
 func pickUp(body):
 	$AnimatedSprite.play("pickup")
-	get_node("pickUpBO/CollisionShape2D").disabled = true
-	body.blueOrbs = body.blueOrbs + 1
+	get_node("pickupH/CollisionShape2D").disabled = true
+	body.playerHealth = 100
 	var t = Timer.new()
 	t.set_wait_time(1)
 	t.set_one_shot(true)
@@ -13,4 +13,4 @@ func pickUp(body):
 	t.start()
 	yield(t, "timeout")
 	t.queue_free()
-	queue_free() 
+	queue_free()
