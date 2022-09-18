@@ -3,4 +3,7 @@
 [ext_resource path="res://assets/fonts/PixeloidSans-Bold.ttf" type="DynamicFontData" id=1]
 
 [resource]
+size = 250
+outline_size = 20
+outline_color = Color( 0.509804, 0, 0, 1 )
 font_data = ExtResource( 1 )

@@ -41,6 +41,7 @@ func _physics_process(delta: float) -> void:
 	
 	if attackFlag == 1 and attackConstraint <= 0:
 			animation_ene_SM.travel("attack")
+			$dagger.play()
 			attackPlayer(player)
 			attackConstraint = 90
 			return
@@ -92,9 +93,7 @@ func attackPlayerFlagRemove(body):
 	attackFlag = 0
 
 func attackPlayer(player):
-	player.playerHealth = player.playerHealth - 10
-	player.takeDamage()
-#	print(player.playerHealth)
+	player.takeDamage(10)
 	
 func chasePlayer(body):
 	chaseFlag = 1

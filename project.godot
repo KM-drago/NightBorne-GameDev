@@ -11,12 +11,12 @@ config_version=4
 [application]
 
 config/name="YnY"
-run/main_scene="res://mainScene.tscn"
+run/main_scene="res://startScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Hud="*res://hud/hud.tscn"
+Globals="*res://globals.gd"
 
 [display]
 
@@ -55,6 +55,9 @@ attack={
 2d_physics/layer_4="playerAttack"
 2d_physics/layer_5="blueOrb"
 2d_physics/layer_6="heart"
+2d_physics/layer_7="deathLayer"
+2d_physics/layer_8="spikes"
+2d_physics/layer_9="tikiTorch"
 
 [physics]
 

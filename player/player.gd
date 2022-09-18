@@ -14,9 +14,11 @@ var prePY : int = 0
 
 var vel : = Vector2()
 
+
 onready var playerSprite : = get_node("playerSprite")
 
 func _ready():
+	Globals.prevScene = get_tree().current_scene.filename
 	animation_SM = $AnimationTree.get("parameters/playback")
 	get_node("attack2D/leftColision").disabled = true
 	get_node("attack2D/rightColision").disabled = true
@@ -24,6 +26,9 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	var currAnimation = animation_SM.get_current_node()
 	vel.x = 0
+	
+	if !$bgs.playing:
+		$bgs.play()
 	
 	if playerHealth <= 0:
 		die()
@@ -68,19 +73,17 @@ func _physics_process(delta: float) -> void:
 		if collision.collider.is_in_group("envTiles") and prePY == int(position.y):
 			vel.y = 50
 
-#		if collision.collider.name.begins_with("ene"):
-#			get_tree().change_scene("res://gameOverScreen.tscn")
-#
-#		if collision.collider.name.begins_with("appl"):
-#			get_tree().change_scene("res://win.tscn")
-
-func takeDamage():
+func takeDamage(dmg):
+	$hurt.play()
+	playerHealth = playerHealth - dmg
 	animation_SM.travel("takeDamage")
 	return
 
 func die():
 	get_node("playerCollision").disabled = true
 	animation_SM.travel("death")
+	if !$death.playing:
+		$death.play()
 #	set_physics_process(false)
 	var t = Timer.new()
 	t.set_wait_time(2.5)
@@ -89,7 +92,7 @@ func die():
 	t.start()
 	yield(t, "timeout")
 	#show game over page
-	get_tree().change_scene("res://mainScene.tscn")
+	get_tree().change_scene("res://gameOver.tscn")
 	t.queue_free()
 	
 	
@@ -99,6 +102,8 @@ func attack():
 	else:
 		get_node("attack2D/rightColision").disabled = false
 	animation_SM.travel("attack")
+	if !$sword.playing:
+		$sword.play()
 	var t = Timer.new()
 	t.set_wait_time(0.1)
 	t.set_one_shot(true)

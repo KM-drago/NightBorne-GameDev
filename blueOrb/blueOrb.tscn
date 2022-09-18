@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/platformer_metroidvania asset pack v1.01/miscellaneous sprites/orb_anim_strip_6.png" type="Texture" id=1]
 [ext_resource path="res://assets/platformer_metroidvania asset pack v1.01/miscellaneous sprites/orb_collected_anim_strip_5.png" type="Texture" id=2]
 [ext_resource path="res://blueOrb/blueOrb.gd" type="Script" id=3]
+[ext_resource path="res://assets/sounds/energyPickUp.wav" type="AudioStream" id=4]
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
@@ -83,7 +84,6 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 8 )
 animation = "idle"
-frame = 3
 playing = true
 
 [node name="pickUpBO" type="Area2D" parent="."]
@@ -91,5 +91,8 @@ collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pickUpBO"]
 shape = SubResource( 1 )
+
+[node name="energyPickUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 
 [connection signal="body_entered" from="pickUpBO" to="." method="pickUp"]

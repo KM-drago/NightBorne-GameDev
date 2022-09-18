@@ -134,4 +134,4 @@ margin_bottom = -11.0
 custom_fonts/mono_font = ExtResource( 4 )
 custom_fonts/bold_font = ExtResource( 5 )
 custom_fonts/normal_font = ExtResource( 6 )
-text = "100"
+text = "0"

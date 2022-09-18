@@ -4,6 +4,7 @@ extends StaticBody2D
 
 func pickUp(body):
 	$AnimatedSprite.play("pickup")
+	$heartPickUp.play()
 	get_node("pickupH/CollisionShape2D").disabled = true
 	body.playerHealth = 100
 	var t = Timer.new()

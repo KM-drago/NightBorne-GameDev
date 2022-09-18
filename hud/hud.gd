@@ -21,4 +21,4 @@ func _physics_process(delta: float) -> void:
 		for i in range(0,player.playerHealth/10):
 			heartArr[i].show()
 		$blueOrbCount.clear()
-		$blueOrbCount.add_text(String(player.blueOrbs))
+		$blueOrbCount.add_text(String(Globals.blueOrbs))
