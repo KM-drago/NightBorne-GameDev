@@ -1,15 +1,13 @@
 extends CanvasLayer
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+
 var heartArr
 var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = get_node("/root/mainScene/Player")
+	player = get_tree().current_scene.get_node("Player")
 	heartArr = [$h1,$h2,$h3,$h4,$h5,$h6,$h7,$h8,$h9,$h10]
 
 func _physics_process(delta: float) -> void:

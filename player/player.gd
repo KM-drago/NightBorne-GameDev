@@ -12,6 +12,7 @@ var direction = Vector2.RIGHT
 
 var prePY : int = 0
 
+
 var vel : = Vector2()
 
 
@@ -33,6 +34,10 @@ func _physics_process(delta: float) -> void:
 	if playerHealth <= 0:
 		die()
 		return
+		
+	if get_tree().current_scene.filename == "res://bossArena.tscn":
+		if !get_node("/root/bossArena/bossMusic").playing:
+			get_node("/root/bossArena/bossMusic").play()
 	
 	if Input.is_action_just_pressed("attack"):
 		attack()

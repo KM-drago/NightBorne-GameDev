@@ -1,0 +1,193 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://assets/Ronin/spr_RoninIdle_strip.png" type="Texture" id=1]
+[ext_resource path="res://assets/Ronin/spr_RoninAttack_strip.png" type="Texture" id=2]
+[ext_resource path="res://assets/Ronin/spr_RoninDeath_strip.png" type="Texture" id=3]
+[ext_resource path="res://assets/Ronin/spr_RoninRun_strip.png" type="Texture" id=4]
+[ext_resource path="res://assets/Ronin/spr_RoninGetHit_strip.png" type="Texture" id=5]
+[ext_resource path="res://bossEnemy/bossEnemy.gd" type="Script" id=6]
+
+[sub_resource type="CapsuleShape2D" id=22]
+height = 9.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "attack"
+length = 1.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.05, 1.1, 1.15, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "death"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("death:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "run"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("run:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "takeDamage"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("takeDamage:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "attack"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "death"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "run"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "takeDamage"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachine" id=7]
+states/attack/node = SubResource( 9 )
+states/attack/position = Vector2( 441, 233 )
+states/death/node = SubResource( 10 )
+states/death/position = Vector2( 1013, 233 )
+states/idle/node = SubResource( 6 )
+states/idle/position = Vector2( 615, 233 )
+states/run/node = SubResource( 11 )
+states/run/position = Vector2( 615, 122 )
+states/takeDamage/node = SubResource( 12 )
+states/takeDamage/position = Vector2( 805, 233 )
+transitions = [ "idle", "run", SubResource( 13 ), "takeDamage", "death", SubResource( 14 ), "idle", "takeDamage", SubResource( 15 ), "idle", "attack", SubResource( 16 ), "attack", "idle", SubResource( 17 ), "run", "attack", SubResource( 18 ), "attack", "run", SubResource( 19 ), "takeDamage", "idle", SubResource( 20 ), "run", "takeDamage", SubResource( 21 ) ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=8]
+
+[node name="bossEnemy" type="KinematicBody2D"]
+scale = Vector2( 3, 3 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 1, 1 )
+shape = SubResource( 22 )
+
+[node name="idle" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 8
+frame = 6
+
+[node name="attack" type="Sprite" parent="."]
+visible = false
+position = Vector2( 14, 0 )
+texture = ExtResource( 2 )
+hframes = 25
+
+[node name="death" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 3 )
+hframes = 16
+
+[node name="run" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 4 )
+hframes = 10
+
+[node name="takeDamage" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 5 )
+hframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/attack = SubResource( 2 )
+anims/death = SubResource( 5 )
+anims/idle = SubResource( 1 )
+anims/run = SubResource( 3 )
+anims/takeDamage = SubResource( 4 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 7 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 8 )

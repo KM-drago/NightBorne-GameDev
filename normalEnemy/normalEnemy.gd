@@ -4,7 +4,9 @@ var animation_ene_SM
 var speed : int = 200
 var gravity : = 600
 
-var enemyHealth : = 20
+export var dmg_output : = 10
+
+export var enemyHealth : = 20
 
 var chaseFlag : = 0
 var attackFlag : = 0
@@ -93,7 +95,7 @@ func attackPlayerFlagRemove(body):
 	attackFlag = 0
 
 func attackPlayer(player):
-	player.takeDamage(10)
+	player.takeDamage(dmg_output)
 	
 func chasePlayer(body):
 	chaseFlag = 1
